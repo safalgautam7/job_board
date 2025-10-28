@@ -1,0 +1,43 @@
+__pycache__/
+*.py[cod]
+*$py.class
+
+.Python
+build/
+develop-eggs/
+dist/
+eggs/
+.egg-info/
+*.egg-info
+parts/
+sdist/
+var/
+*.mo
+*.pot
+*.log
+local_settings.py # For local database/secret settings
+db.sqlite3 # SQLite database file
+
+# Virtual environment
+venv/
+env/
+.env/
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp # Vim swap files
+*.swo # Vim swap files
+
+# Django specific
+*.log
+*.pot
+media/ # User uploaded media files
+static_cdn/ # Generated static files (if not using a separate static storage)
+migrations/**/__pycache__/ # Migration cache files
+
+# Testing and coverage
+.tox/
+.coverage
+htmlcov/
+.pytest_cache/
