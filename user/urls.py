@@ -1,6 +1,6 @@
 from django.urls import path
-
+from .views import UserManagementView
 
 urlpatterns = [
-    path('',)
+    path('',UserManagementView.as_view()),
 ]
