@@ -6,6 +6,8 @@ from django.contrib.auth.models import (
 from django.core.exceptions import ValidationError
 from django.utils.text import slugify
 
+from rest_framework_simplejwt.tokens import RefreshToken
+
 
 def generate_username_from_email(email):
     """Generate a unique username from email."""
@@ -109,3 +111,12 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return f"{self.username} ({self.role})"
+    
+    @property
+    def token(self):
+        """Allow us to get a user's token by calling `user.token`"""
+        refresh = RefreshToken.for_user(self)
+        return {
+            'refresh': str(refresh),
+            'access': str(refresh.access_token),
+        }
