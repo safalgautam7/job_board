@@ -22,7 +22,7 @@ class Job(models.Model):
     
     # ManyToManyField: A job can require multiple skills, and a skill can be required by multiple jobs
     requirements = models.ManyToManyField(Skill, blank=True)
-    employer = models.ForeignKey(User, on_delete=models.CASCADE)
+    employer = models.ForeignKey(User, on_delete=models.CASCADE,related_name='jobs')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_active = models.BooleanField(default=False)
@@ -51,7 +51,7 @@ class Application(models.Model):
     # related_name='applications': Enables Job.objects.applications.all() 
     # on_delete=CASCADE: If job is deleted, applications are also deleted
     job = models.ForeignKey(Job, on_delete=models.CASCADE, related_name='applications')
-    candidate = models.ForeignKey(User, on_delete=models.CASCADE, related_name='job_applications')
+    candidate = models.ForeignKey(User, on_delete=models.CASCADE, related_name='job_applicants')
     cover_letter = models.TextField(blank=True)
     applied_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
