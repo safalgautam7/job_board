@@ -11,10 +11,21 @@ class SkillSerializer(serializers.ModelSerializer):
     class Meta:
         model = Skill
         fields = ['name']
+        
+
+class JobListSerializer(serializers.ModelSerializer):
+    """Lists jobs."""
+    skills = SkillSerializer(many = True, read_only = True)
+    fields = '__all__'
+    def get_fields(self):
+        fields = super().get_fields()
+        for field in fields.values():
+            field.read_only = True
+        return fields
 
 
 class JobCreateSerializer(serializers.ModelSerializer):
-    """Lists, creates and updates Job model."""
+    """ creates and updates Job model."""
     skills = serializers.ListField(
         child=serializers.CharField(max_length=50),
         required=False,
